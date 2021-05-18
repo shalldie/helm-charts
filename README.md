@@ -1,5 +1,9 @@
 # filebrowser-helm-chart
 
+![](https://user-images.githubusercontent.com/5447088/50716739-ebd26700-107a-11e9-9817-14230c53efd2.gif)
+
+<br>
+
 [![Github Actions][actions_image]][actions_url]
 [![license][license_image]][repo_url]
 
