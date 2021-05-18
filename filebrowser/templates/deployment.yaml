@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.meta.namespace }}
+  name: {{ .Values.meta.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "filebrowser.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "filebrowser.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Values.meta.name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+          {{- if .Values.volume }}
+          volumeMounts:
+            {{- if .Values.volume.hostPathSRV }}
+            - name: {{ .Values.meta.name }}-volume-srv
+              mountPath: "/srv"
+            {{ end }}
+            {{- if .Values.volume.hostPathDB }}
+            - name: {{ .Values.meta.name }}-volume-db
+              mountPath: "/database.db"
+            {{ end }}
+          {{ end }}
+      {{- if .Values.volume }}
+      volumes:
+        {{- if .Values.volume.hostPathSRV }}
+        - name: {{ .Values.meta.name }}-volume-srv
+          hostPath:
+            path: {{ .Values.volume.hostPathSRV }}
+            type: DirectoryOrCreate
+        {{ end }}
+        {{- if .Values.volume.hostPathDB }}
+        - name: {{ .Values.meta.name }}-volume-db
+          hostPath:
+            path: {{ .Values.volume.hostPathDB }}
+            type: File
+        {{ end }}
+      {{ end }}
