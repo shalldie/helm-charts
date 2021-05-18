@@ -20,7 +20,8 @@ service:
   # with type = NodePort
   # nodePort: 8080
 
-
 # volume:
+  # static serve
   # hostPathSRV: "/var/lib/filebrowser/srv"
+  # config database
   # hostPathDB: "/var/lib/filebrowser/database.db"
