@@ -6,13 +6,15 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: {{ .Values.service.port }}
+    - name: api
+      port: {{ .Values.service.port }}
       targetPort: 9000
       {{- if .Values.service.nodePort }}
       nodePort: {{ .Values.service.nodePort }}
       {{- end }}
       protocol: TCP
-    - port: {{ .Values.console.port }}
+    - name: console
+      port: {{ .Values.console.port }}
       targetPort: 9001
       {{- if .Values.console.nodePort }}
       nodePort: {{ .Values.console.nodePort }}

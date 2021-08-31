@@ -17,9 +17,8 @@ spec:
         - name: {{ .Values.meta.name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command:
-            - server
           args:
+            - server
             - /data
             - --console-address
             - ":9001"
