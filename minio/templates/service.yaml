@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Values.meta.namespace }}
+  name: {{ .Values.meta.name }}
+spec:
+  type: NodePort
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 9000
+      {{- if .Values.service.nodePort }}
+      nodePort: {{ .Values.service.nodePort }}
+      {{- end }}
+      protocol: TCP
+    - port: {{ .Values.console.port }}
+      targetPort: 9001
+      {{- if .Values.console.nodePort }}
+      nodePort: {{ .Values.console.nodePort }}
+      {{- end }}
+      protocol: TCP
+  selector:
+    {{- include "minio.selectorLabels" . | nindent 4 }}

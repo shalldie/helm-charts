@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.meta.namespace }}
+  name: {{ .Values.meta.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "minio.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "minio.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Values.meta.name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - server
+          args:
+            - /data
+            - --console-address
+            - ":9001"
+          ports:
+            - containerPort: 9000
+          {{- if .Values.volume }}
+          volumeMounts:
+            {{- if .Values.volume.data }}
+            - name: {{ .Values.meta.name }}-volume-data
+              mountPath: "/data"
+            {{ end }}
+            {{- if .Values.volume.config }}
+            - name: {{ .Values.meta.name }}-volume-config
+              mountPath: "/root/.minio"
+            {{ end }}
+          {{ end }}
+      {{- if .Values.volume }}
+      volumes:
+        {{- if .Values.volume.data }}
+        - name: {{ .Values.meta.name }}-volume-data
+          hostPath:
+            path: {{ .Values.volume.data }}
+            type: DirectoryOrCreate
+        {{ end }}
+        {{- if .Values.volume.config }}
+        - name: {{ .Values.meta.name }}-volume-config
+          hostPath:
+            path: {{ .Values.volume.config }}
+            type: File
+        {{ end }}
+      {{ end }}

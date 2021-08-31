@@ -1,0 +1,33 @@
+# Default values for filebrowser.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+meta:
+  namespace: default
+  name: minio
+
+image:
+  repository: minio/minio
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+user:
+  name: minio
+  password: minio123
+
+service:
+  port: 8080
+  # nodePort: 8081
+
+# 可视化 console
+console:
+    port: 8082
+#   nodePort: 8082
+
+# volume:
+  # 数据
+  # data: "/var/lib/minio/data"
+  # 配置，需要提前 `touch`，否则会被识别成文件夹
+  # config: "/var/lib/minio/config"
