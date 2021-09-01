@@ -12,13 +12,13 @@ user:
   password: minio123
 
 service:
-  port: 8080
-  # nodePort: 8081
+  port: 9000
+  # nodePort: 9000
 
 # 可视化 console
 console:
-  port: 8082
-  # nodePort: 8082
+  port: 9001
+  # nodePort: 9001
 
 # volume:
   # 数据
