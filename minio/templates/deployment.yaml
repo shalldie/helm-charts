@@ -4,7 +4,7 @@ metadata:
   namespace: {{ .Values.meta.namespace }}
   name: {{ .Values.meta.name }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
       {{- include "minio.selectorLabels" . | nindent 6 }}
@@ -17,6 +17,11 @@ spec:
         - name: {{ .Values.meta.name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: MINIO_ROOT_USER
+              value: {{ .Values.user.name }}
+            - name: MINIO_ROOT_PASSWORD
+              value: {{ .Values.user.password }}
           args:
             - server
             - /data
@@ -47,6 +52,6 @@ spec:
         - name: {{ .Values.meta.name }}-volume-config
           hostPath:
             path: {{ .Values.volume.config }}
-            type: File
+            type: DirectoryOrCreate
         {{ end }}
       {{ end }}

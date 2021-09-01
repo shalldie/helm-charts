@@ -1,0 +1,22 @@
+{
+  "name": "helm-charts",
+  "version": "1.0.0",
+  "description": "存放一些常用的 helm-charts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shalldie/helm-charts.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shalldie/helm-charts/issues"
+  },
+  "homepage": "https://github.com/shalldie/helm-charts#readme",
+  "devDependencies": {
+    "prettier": "^2.3.2"
+  }
+}
