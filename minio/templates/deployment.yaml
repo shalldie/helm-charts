@@ -18,10 +18,12 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: MINIO_ROOT_USER
-              value: {{ .Values.user.name }}
-            - name: MINIO_ROOT_PASSWORD
-              value: {{ .Values.user.password }}
+            {{- range .Values.env }}
+            {{- with . }}
+            - name: {{ .name }}
+              value: {{ .value }}
+            {{- end }}
+            {{- end }}
           args:
             - server
             - /data
