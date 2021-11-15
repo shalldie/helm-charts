@@ -1,0 +1,18 @@
+meta:
+  namespace: default
+  name: nginx
+
+image:
+  repository: shalldie/nginx
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 80
+  # with type = NodePort
+  # nodePort: 8080
+
+# all *.conf, volume to "/etc/nginx/http.d"
+# volume: "/etc/nginx/http.d"

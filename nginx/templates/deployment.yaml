@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.meta.namespace }}
+  name: {{ .Values.meta.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "nginx.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "nginx.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Values.meta.name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - nginx
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+          {{- if .Values.volume }}
+          volumeMounts:
+            - name: {{ .Values.meta.name }}-volume-config
+              mountPath: "/etc/nginx/http.d"
+          {{ end }}
+      {{- if .Values.volume }}
+      volumes:
+        - name: {{ .Values.meta.name }}-volume-config
+          hostPath:
+            path: {{ .Values.volume }}
+            type: DirectoryOrCreate
+      {{ end }}
