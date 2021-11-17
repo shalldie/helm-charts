@@ -47,7 +47,12 @@ service:
   # with type = NodePort
   # nodePort: 8080
 
-# volume:
+ingress:
+  enable: false
+  baseURL: "/"
+
+
+volume: {}
   # static serve
   # hostPathSRV: "/var/lib/filebrowser/srv"
   # config database，需要提前创建 `touch database.db`，否则会被识别成文件夹

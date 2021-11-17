@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{.Values.meta.namespace}}
+  name: {{.Values.meta.name}}
+data:
+  filebrowser: |
+    {
+      "port": {{ .Values.service.targetPort }},
+      "baseURL": "{{ .Values.ingress.baseURL }}",
+      "address": "",
+      "log": "stdout",
+      "database": "/database.db",
+      "root": "/srv"
+    }

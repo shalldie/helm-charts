@@ -19,8 +19,10 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.targetPort }}
-          {{- if .Values.volume }}
           volumeMounts:
+            - name: {{ .Values.meta.name }}-volume-cm
+              mountPath: /
+              subPath: .filebrowser.json
             {{- if .Values.volume.hostPathSRV }}
             - name: {{ .Values.meta.name }}-volume-srv
               mountPath: "/srv"
@@ -29,9 +31,14 @@ spec:
             - name: {{ .Values.meta.name }}-volume-db
               mountPath: "/database.db"
             {{ end }}
-          {{ end }}
       {{- if .Values.volume }}
       volumes:
+        - name: {{ .Values.meta.name }}-volume-cm
+          configMap:
+            name: {{ .Values.meta.name }}-cm
+            items:
+              - key: filebrowser
+                path: .filebrowser.json
         {{- if .Values.volume.hostPathSRV }}
         - name: {{ .Values.meta.name }}-volume-srv
           hostPath:
