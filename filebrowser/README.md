@@ -51,7 +51,6 @@ ingress:
   enable: false
   baseURL: "/"
 
-
 volume: {}
   # static serve
   # hostPathSRV: "/var/lib/filebrowser/srv"

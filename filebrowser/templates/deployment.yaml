@@ -21,8 +21,8 @@ spec:
             - containerPort: {{ .Values.service.targetPort }}
           volumeMounts:
             - name: {{ .Values.meta.name }}-volume-cm
-              mountPath: /
-              subPath: .filebrowser.json
+              mountPath: /.filebrowser.json
+              subPath: filebrowser
             {{- if .Values.volume.hostPathSRV }}
             - name: {{ .Values.meta.name }}-volume-srv
               mountPath: "/srv"
@@ -31,14 +31,10 @@ spec:
             - name: {{ .Values.meta.name }}-volume-db
               mountPath: "/database.db"
             {{ end }}
-      {{- if .Values.volume }}
       volumes:
         - name: {{ .Values.meta.name }}-volume-cm
           configMap:
-            name: {{ .Values.meta.name }}-cm
-            items:
-              - key: filebrowser
-                path: .filebrowser.json
+            name: {{ .Values.meta.name }}
         {{- if .Values.volume.hostPathSRV }}
         - name: {{ .Values.meta.name }}-volume-srv
           hostPath:
@@ -51,4 +47,3 @@ spec:
             path: {{ .Values.volume.hostPathDB }}
             type: File
         {{ end }}
-      {{ end }}
