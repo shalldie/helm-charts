@@ -31,6 +31,9 @@ helm uninstall code-server
 
 replicaCount: 1
 
+# 密码放这里, password here
+# password: ""
+
 image:
   repository: codercom/code-server
   tag: '4.0.0'
