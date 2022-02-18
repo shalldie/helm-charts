@@ -36,7 +36,7 @@ replicaCount: 1
 
 image:
   repository: codercom/code-server
-  tag: '4.0.0'
+  tag: "4.0.1"
   pullPolicy: Always
 
 imagePullSecrets: []
@@ -55,7 +55,8 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # fsGroup: 2000
 
 service:
@@ -78,7 +79,8 @@ ingress:
   #      - code-server.example.loc
 
 # Optional additional arguments
-extraArgs: []
+extraArgs:
+  []
   # These are the arguments normally passed to code-server; run
   # code-server --help for a list of available options.
   #
@@ -114,7 +116,8 @@ securityContext:
   fsGroup: 1000
   runAsUser: 1000
 
-resources: {}
+resources:
+  {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -169,21 +172,24 @@ extraContainers: |
 #    value: "overlay2"
 
 ## Additional code-server secret mounts
-extraSecretMounts: []
+extraSecretMounts:
+  []
   # - name: secret-files
   #   mountPath: /etc/secrets
   #   secretName: code-server-secret-files
   #   readOnly: true
 
 ## Additional code-server volume mounts
-extraVolumeMounts: []
+extraVolumeMounts:
+  []
   # - name: extra-volume
   #   mountPath: /mnt/volume
   #   readOnly: true
   #   existingClaim: volume-claim
   #   hostPath: ""
 
-extraConfigmapMounts: []
+extraConfigmapMounts:
+  []
   # - name: certs-configmap
   #   mountPath: /etc/code-server/ssl/
   #   subPath: certificates.crt # (optional)
