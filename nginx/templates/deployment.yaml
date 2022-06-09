@@ -18,7 +18,9 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:
-            - nginx
+            {{- range .Values.image.command }}
+            - {{ . }}
+            {{- end }}
           ports:
             - containerPort: {{ .Values.service.targetPort }}
           {{- if .Values.volume }}
