@@ -28,8 +28,8 @@ jobs:
       - name: Build and push alpineos:alpine3.16.0-nginx1.22.0
         uses: docker/build-push-action@v3
         with:
-          context: ./.dockerfiles
-          file: ./.dockerfiles/Dockerfile.alpine3.16.0-nginx1.22.0
+          context: ./dockerfiles
+          file: ./dockerfiles/Dockerfile.alpine3.16.0-nginx1.22.0
           push: true
           tags: shalldie/alpineos:alpine3.16.0-nginx1.22.0
 
@@ -37,8 +37,8 @@ jobs:
       - name: Build and push alpineos:alpine3.14.6-node14-nginx1.20.2
         uses: docker/build-push-action@v3
         with:
-          context: ./.dockerfiles
-          file: ./.dockerfiles/Dockerfile.alpine3.14.6-node14-nginx1.20.2
+          context: ./dockerfiles
+          file: ./dockerfiles/Dockerfile.alpine3.14.6-node14-nginx1.20.2
           push: true
           tags: shalldie/alpineos:alpine3.14.6-node14-nginx1.20.2
 
@@ -46,7 +46,7 @@ jobs:
       - name: Build and push alpineos:alpine3.16.0-node16-nginx1.22.0
         uses: docker/build-push-action@v3
         with:
-          context: ./.dockerfiles
-          file: ./.dockerfiles/Dockerfile.alpine3.16.0-node16-nginx1.22.0
+          context: ./dockerfiles
+          file: ./dockerfiles/Dockerfile.alpine3.16.0-node16-nginx1.22.0
           push: true
           tags: shalldie/alpineos:alpine3.16.0-node16-nginx1.22.0
