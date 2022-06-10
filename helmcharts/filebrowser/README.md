@@ -14,7 +14,8 @@ Helm chart for [filebrowser/filebrowser](https://github.com/filebrowser/filebrow
 ## Installation
 
 ```bash
-helm install filebrowser https://github.com/shalldie/helm-charts/releases/download/0.0.1/filebrowser-0.0.1.tgz
+wget https://github.com/shalldie/helm-charts/releases/download/latest/filebrowser-1.0.0.tgz
+helm install filebrowser ./filebrowser-1.0.0.tgz
 ```
 
 ## Uninstallation

@@ -10,7 +10,8 @@ Copied helm chart from https://github.com/cdr/code-server
 ## Installation
 
 ```bash
-helm install code-server https://github.com/shalldie/helm-charts/releases/download/0.0.1/code-server-0.0.1.tgz
+wget https://github.com/shalldie/helm-charts/releases/download/latest/code-server-2.5.0.tgz
+helm install code-server ./code-server-2.5.0.tgz
 ```
 
 ## Uninstallation
@@ -33,13 +34,17 @@ replicaCount: 1
 
 # 密码放这里, password here
 # password: ""
-
 image:
   repository: codercom/code-server
-  tag: "4.0.1"
+  tag: "4.4.0"
   pullPolicy: Always
 
+# Specifies one or more secrets to be used when pulling images from a
+# private container repository
+# https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry
 imagePullSecrets: []
+#  - name: registry-creds
+
 nameOverride: ""
 fullnameOverride: ""
 hostnameOverride: ""
@@ -66,13 +71,12 @@ service:
 ingress:
   enabled: false
   #annotations:
-  #  kubernetes.io/ingress.class: nginx
   #  kubernetes.io/tls-acme: "true"
   #hosts:
   #  - host: code-server.example.loc
   #    paths:
   #      - /
-
+  ingressClassName: ""
   #tls:
   #  - secretName: code-server
   #    hosts:
@@ -98,6 +102,8 @@ extraArgs:
 extraVars: []
 #  - name: DISABLE_TELEMETRY
 #    value: true
+#  - name: DOCKER_HOST
+#    value: "tcp://localhost:2375"
 
 ##
 ## Init containers parameters:
@@ -155,6 +161,7 @@ persistence:
 ## Enable an Specify container in extraContainers.
 ## This is meant to allow adding code-server dependencies, like docker-dind.
 extraContainers: |
+# If docker-dind is used, DOCKER_HOST env is mandatory to set in "extraVars"
 #- name: docker-dind
 #  image: docker:19.03-dind
 #  imagePullPolicy: IfNotPresent

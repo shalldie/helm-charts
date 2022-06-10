@@ -10,7 +10,8 @@ Helm chart for [shalldie/nginx](https://hub.docker.com/repository/docker/shalldi
 ## Installation
 
 ```bash
-helm install nginx https://github.com/shalldie/helm-charts/releases/download/0.0.1/nginx-0.0.1.tgz
+wget nginx-1.0.0.tgz
+helm install nginx ./nginx-1.0.0.tgz
 ```
 
 ## Uninstallation
@@ -30,9 +31,13 @@ meta:
   name: nginx
 
 image:
-  repository: shalldie/nginx
+  repository: shalldie/alpineos
   pullPolicy: IfNotPresent
-  tag: "latest"
+  tag: "alpine3.16.0-nginx1.22.0"
+  command:
+    - nginx
+    - -g
+    - '"daemon off;"'
 
 service:
   type: ClusterIP
@@ -40,7 +45,7 @@ service:
   targetPort: 80
   # with type = NodePort
   # nodePort: 8080
-
+# -
 # all *.conf, volume to "/etc/nginx/http.d"
 # volume: "/etc/nginx/http.d"
 ```

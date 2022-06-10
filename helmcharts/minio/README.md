@@ -10,7 +10,8 @@ helm chart for https://hub.docker.com/r/minio/minio
 ## Installation
 
 ```bash
-helm install minio https://github.com/shalldie/helm-charts/releases/download/0.0.1/minio-0.0.1.tgz
+wget https://github.com/shalldie/helm-charts/releases/download/latest/minio-1.0.0.tgz
+helm install minio ./minio-1.0.0.tgz
 ```
 
 ## Uninstallation
