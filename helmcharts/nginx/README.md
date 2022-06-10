@@ -10,7 +10,7 @@ Helm chart for [shalldie/nginx](https://hub.docker.com/repository/docker/shalldi
 ## Installation
 
 ```bash
-wget nginx-1.0.0.tgz
+wget https://github.com/shalldie/helm-charts/releases/download/latest/nginx-1.0.0.tgz
 helm install nginx ./nginx-1.0.0.tgz
 ```
 
