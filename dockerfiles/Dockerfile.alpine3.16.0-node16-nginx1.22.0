@@ -8,5 +8,5 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 RUN apk add --no-cache nodejs=16.15.0-r1 \
     && apk add --no-cache npm=8.10.0-r0 \
-    && apk add --no-cache nginx=1.22.0-r0 \
+    && apk add --no-cache nginx=1.22.0-r1 \
     && apk add --no-cache gettext
