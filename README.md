@@ -3,7 +3,7 @@
 [![Github Actions][actions_image]][actions_url]
 [![license][license_image]][repo_url]
 
-存放一些常用的 `Helm Chart`、`Dockerfile`
+存放一些常用的 `Helm Chart`、`Dockerfile`。
 
 ## Helm Chart
 
