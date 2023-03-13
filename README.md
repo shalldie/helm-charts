@@ -25,6 +25,6 @@
 | `alpineos:alpine3.16.0-node16-nginx1.22.0` | ...    |
 
 [repo_url]: https://github.com/shalldie/helm-charts
-[actions_image]: https://img.shields.io/github/workflow/status/shalldie/helm-charts/ci?label=build&logo=github&style=flat-square
+[actions_image]: https://img.shields.io/github/actions/workflow/status/shalldie/helm-charts/ci.yml?branch=master&label=build&logo=github&style=flat-square
 [actions_url]: https://github.com/shalldie/helm-charts/actions
 [license_image]: https://img.shields.io/github/license/shalldie/helm-charts?style=flat-square
