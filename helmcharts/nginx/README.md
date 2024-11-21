@@ -33,7 +33,7 @@ meta:
 image:
   repository: shalldie/alpineos
   pullPolicy: IfNotPresent
-  tag: "alpine3.16.0-nginx1.22.0"
+  tag: "alpine3.20-nginx1.26.2"
   command:
     - nginx
     - -g
