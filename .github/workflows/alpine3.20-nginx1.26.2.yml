@@ -36,5 +36,6 @@ jobs:
         with:
           context: ./dockerfiles
           file: ./dockerfiles/Dockerfile.alpine3.20-nginx1.26.2
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: shalldie/alpineos:alpine3.20-nginx1.26.2
