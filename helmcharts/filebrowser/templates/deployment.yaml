@@ -13,6 +13,9 @@ spec:
       labels:
         {{- include "filebrowser.selectorLabels" . | nindent 8 }}
     spec:
+      securityContext:
+        runAsUser: 0         # 让整个 Pod 下所有容器都用 root
+        runAsNonRoot: false  # 确保不被 Admission 阻止（有些集群需要）
       containers:
         - name: {{ .Values.meta.name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -21,29 +24,29 @@ spec:
             - containerPort: {{ .Values.service.targetPort }}
           volumeMounts:
             - name: {{ .Values.meta.name }}-volume-cm
-              mountPath: /.filebrowser.json
+              mountPath: /config/settings.json
               subPath: filebrowser
-            {{- if .Values.volume.hostPathSRV }}
+            {{- if .Values.volume.srv }}
             - name: {{ .Values.meta.name }}-volume-srv
               mountPath: "/srv"
             {{ end }}
-            {{- if .Values.volume.hostPathDB }}
-            - name: {{ .Values.meta.name }}-volume-db
-              mountPath: "/database.db"
+            {{- if .Values.volume.database }}
+            - name: {{ .Values.meta.name }}-volume-database
+              mountPath: "/database"
             {{ end }}
       volumes:
         - name: {{ .Values.meta.name }}-volume-cm
           configMap:
             name: {{ .Values.meta.name }}
-        {{- if .Values.volume.hostPathSRV }}
+        {{- if .Values.volume.srv }}
         - name: {{ .Values.meta.name }}-volume-srv
           hostPath:
-            path: {{ .Values.volume.hostPathSRV }}
+            path: {{ .Values.volume.srv }}
             type: DirectoryOrCreate
         {{ end }}
-        {{- if .Values.volume.hostPathDB }}
-        - name: {{ .Values.meta.name }}-volume-db
+        {{- if .Values.volume.database }}
+        - name: {{ .Values.meta.name }}-volume-database
           hostPath:
-            path: {{ .Values.volume.hostPathDB }}
-            type: File
+            path: {{ .Values.volume.database }}
+            type: DirectoryOrCreate
         {{ end }}

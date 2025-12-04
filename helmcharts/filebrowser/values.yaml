@@ -22,6 +22,5 @@ ingress:
 
 volume: {}
   # static serve
-  # hostPathSRV: "/var/lib/filebrowser/srv"
-  # config database，需要提前创建 `touch database.db`，否则会被识别成文件夹
-  # hostPathDB: "/var/lib/filebrowser/database.db"
+  # srv: "/var/lib/filebrowser/srv"
+  # database: "/var/lib/filebrowser/database"
